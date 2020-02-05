@@ -9,10 +9,4 @@ COPY vsftpd.pem /etc/ssl/certs/vsftpd.pem
 COPY start_vsftpd.sh /usr/local/bin/start_vsftpd.sh
 COPY vsftpd.conf /etc/vsftpd/vsftpd.conf
 
-#ENTRYPOINT ["tail", "-f", "/var/log/vsftpd.log"]
-#ENTRYPOINT ["tail", "-f", "/dev/null"]
 ENTRYPOINT ["/usr/local/bin/start_vsftpd.sh"]
-
-
-#CMD ["cat", "/etc/passwd"]
-#CMD ["grep", "'/ftp/'", "/etc/passwd"]
