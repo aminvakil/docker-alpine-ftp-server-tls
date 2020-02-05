@@ -1,12 +1,13 @@
 FROM alpine:3.13
+
+LABEL maintainer="Amin Vakil <info@aminvakil.com>"
+
 RUN apk --no-cache add vsftpd
 
-COPY start_vsftpd.sh /bin/start_vsftpd.sh
+COPY vsftpd.pem /etc/ssl/certs/vsftpd.pem
+COPY start_vsftpd.sh /usr/local/bin/start_vsftpd.sh
 COPY vsftpd.conf /etc/vsftpd/vsftpd.conf
-
-EXPOSE 21 21000-21010
-VOLUME /ftp/ftp
 
 STOPSIGNAL SIGKILL
 
-ENTRYPOINT ["/bin/start_vsftpd.sh"]
+ENTRYPOINT ["/usr/local/bin/start_vsftpd.sh"]
