@@ -1,5 +1,4 @@
 #!/bin/sh
-set +x
 #Remove all ftp users
 #grep '/ftp/' /etc/passwd | cut -d':' -f1 | xargs -n1 deluser
 
