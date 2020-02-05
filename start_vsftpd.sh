@@ -1,7 +1,7 @@
 #!/bin/sh
-
+set +x
 #Remove all ftp users
-grep '/ftp/' /etc/passwd | cut -d':' -f1 | xargs -n1 deluser
+#grep '/ftp/' /etc/passwd | cut -d':' -f1 | xargs -n1 deluser
 
 #Create users
 #USERS='name1|password1|[folder1][|uid1] name2|password2|[folder2][|uid2]'
@@ -15,7 +15,7 @@ grep '/ftp/' /etc/passwd | cut -d':' -f1 | xargs -n1 deluser
 #Default user 'ftp' with password 'alpineftp'
 
 if [ -z "$USERS" ]; then
-  USERS="ftp|alpineftp"
+  USERS="amin|alpineftp"
 fi
 
 for i in $USERS ; do
@@ -55,6 +55,5 @@ fi
 if [ ! -z "$1" ]; then
   exec "$@"
 else
-  exec /usr/sbin/vsftpd -opasv_min_port=$MIN_PORT -opasv_max_port=$MAX_PORT $ADDR_OPT /etc/vsftpd/vsftpd.conf
+  exec /usr/sbin/vsftpd -opasv_min_port=$MIN_PORT -opasv_max_port=$MAX_PORT $ADDR_OPT /etc/vsftpd/vsftpd.conf & sleep infinity
 fi
-
