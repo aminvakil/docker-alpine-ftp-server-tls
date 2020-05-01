@@ -29,3 +29,5 @@ Environment variables:
 ## ALERT
 Do not use this certificate in your production server, you should generate your own certificate using this command
 `openssl req -x509 -nodes -days 7300 -newkey rsa:2048 -keyout vsftpd.pem -out vsftpd.pem`
+
+The image gets big if we add openssl and generate certificate inside container, but it will be easy on host to generate a new certificate.
