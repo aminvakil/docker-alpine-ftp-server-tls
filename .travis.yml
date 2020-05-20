@@ -11,16 +11,17 @@ services:
 before_install:
 - sudo curl -L https://github.com/hadolint/hadolint/releases/download/v$HADOLINT_VERSION/hadolint-$(uname -s)-$(uname -m) -o /usr/local/bin/hadolint
 - sudo chmod 755 /usr/local/bin/hadolint
-- CLIENT_PORT=$(cat /dev/urandom|od -N2 -An -i|awk -v f=10000 -v r=19999 '{printf "%i\n", f + r * $1 / 65536}')
-- [ $(netstat -an | grep LISTEN | grep :$CLIENT_PORT | wc -l) -eq 0 ] || { ./$0 && exit 0 || exit 1; }
+#- CLIENT_PORT=$(cat /dev/urandom|od -N2 -An -i|awk -v f=10000 -v r=19999 '{printf "%i\n", f + r * $1 / 65536}')
+#- [ $(netstat -an | grep LISTEN | grep :$CLIENT_PORT | wc -l) -eq 0 ] || { ./$0 && exit 0 || exit 1; }
 install:
 - docker build
   --no-cache
   --tag ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} .
 script:
-- DOCKERCONTAINER=$(docker run -d ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} -p 127.0.0.1:${CLIENT_PORT}:21 -e ADDRESS=ftp.example.com)
-- sleep 5
-- nc localhost ${CLIENT_PORT} < /dev/null || exit 1
+#- DOCKERCONTAINER=$(docker run -d ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} -p 127.0.0.1:${CLIENT_PORT}:21 -e ADDRESS=ftp.example.com)
+#- sleep 5
+#- nc localhost ${CLIENT_PORT} < /dev/null || exit 1
+- DOCKERCONTAINER=$(docker run -d ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} -e ADDRESS=ftp.example.com)
 - sleep 10
 - docker ps -f id=${DOCKERCONTAINER}
 - hadolint Dockerfile
