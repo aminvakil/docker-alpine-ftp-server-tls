@@ -18,10 +18,9 @@ install:
   --no-cache
   --tag ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} .
 script:
-- DOCKERCONTAINER=$(docker run -d ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} -p 127.0.0.1:${CLIENT_PORT}:21 -e ADDRESS=ftp.example.com)
-#- sleep 5
-#- telnet localhost ${CLIENT_PORT} < /dev/null || exit 1
+- DOCKERCONTAINER=$(docker run -d -p 127.0.0.1:${CLIENT_PORT}:21 -e ADDRESS=ftp.example.com ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT})
 - sleep 5
 - docker ps -f id=${DOCKERCONTAINER}
+- nc 127.0.0.1 ${CLIENT_PORT} < /dev/null
 - hadolint Dockerfile
 - docker stop ${DOCKERCONTAINER} && docker rm -fv ${DOCKERCONTAINER}
