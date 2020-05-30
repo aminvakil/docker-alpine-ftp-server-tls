@@ -24,6 +24,7 @@ script:
 - nc 127.0.0.1 ${CLIENT_PORT} < /dev/null
 - hadolint Dockerfile
 - docker stop ${DOCKERCONTAINER} && docker rm -fv ${DOCKERCONTAINER}
+after_success"
 - docker tag ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} aminvakil/alpine-ftp-server-tls
 - echo "$DOCKER_PASSWORD" | docker login -u aminvakil --password-stdin
 - docker push aminvakil/alpine-ftp-server-tls
