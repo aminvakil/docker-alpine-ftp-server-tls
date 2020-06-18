@@ -6,6 +6,6 @@ RUN apk --no-cache add vsftpd=3.0.3-r6
 
 COPY vsftpd.pem /etc/ssl/certs/vsftpd.pem
 COPY start_vsftpd.sh /usr/local/bin/start_vsftpd.sh
-COPY vsftpd.conf_reusessl /etc/vsftpd/vsftpd.conf
+COPY vsftpd.conf_noreusessl /etc/vsftpd/vsftpd.conf
 
 ENTRYPOINT ["/usr/local/bin/start_vsftpd.sh"]
