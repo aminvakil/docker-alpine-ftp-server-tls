@@ -20,7 +20,7 @@ install:
 - docker build
   --no-cache
   --tag ${TRAVIS_REPO_SLUG}:reusessl
-  - f Dockerfile_reusessl
+  -f Dockerfile_reusessl
 script:
 - DOCKERCONTAINER=$(docker run -d -p 127.0.0.1:${CLIENT_PORT}:21 -e ADDRESS=ftp.example.com ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT})
 - sleep 5
