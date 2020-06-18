@@ -19,7 +19,7 @@ install:
   --tag ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} .
 - docker build
   --no-cache
-  --tag ${TRAVIS_REPO_SLUG}/${TRAVIS_COMMIT}:noreusessl
+  --tag ${TRAVIS_REPO_SLUG}:noreusessl
   -f Dockerfile_noreusessl .
 script:
 - DOCKERCONTAINER=$(docker run -d -p 127.0.0.1:${CLIENT_PORT}:21 -e ADDRESS=ftp.example.com ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT})
@@ -33,5 +33,5 @@ after_success:
 - docker tag ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} aminvakil/alpine-ftp-server-tls
 - echo "$DOCKER_PASSWORD" | docker login -u aminvakil --password-stdin
 - docker push aminvakil/alpine-ftp-server-tls
-- docker tag ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT}:noreusessl aminvakil/alpine-ftp-server-tls:noreusessl
+- docker tag ${TRAVIS_REPO_SLUG}:noreusessl aminvakil/alpine-ftp-server-tls:noreusessl
 - docker push aminvakil/alpine-ftp-server-tls:noreusessl
