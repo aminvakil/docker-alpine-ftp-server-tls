@@ -1,0 +1,73 @@
+# Allow anonymous FTP? (Beware - allowed by default if you comment this out).
+anonymous_enable=NO
+#
+# Uncomment this to allow local users to log in.
+local_enable=YES
+#
+# Uncomment this to enable any form of FTP write command.
+write_enable=YES
+#
+# Default umask for local users is 077. You may wish to change this to 022,
+# if your users expect that (022 is used by most other ftpd's)
+#local_umask=022
+#
+# Activate logging of uploads/downloads.
+xferlog_enable=YES
+#
+# Make sure PORT transfer connections originate from port 20 (ftp-data).
+connect_from_port_20=YES
+#
+# You may override where the log file goes if you like. The default is shown
+# below.
+#xferlog_file=/var/log/vsftpd.log
+vsftpd_log_file=/proc/1/fd/1
+#
+# If you want, you can have your log file in standard ftpd xferlog format.
+# Note that the default log file location is /var/log/xferlog in this case.
+#xferlog_std_format=YES
+#
+# You may change the default value for timing out an idle session.
+#idle_session_timeout=600
+#
+# You may change the default value for timing out a data connection.
+#data_connection_timeout=120
+#
+# It is recommended that you define on your system a unique user which the
+# ftp server can use as a totally isolated and unprivileged user.
+#nopriv_user=ftpsecure
+#
+# Enable this and the server will recognise asynchronous ABOR requests. Not
+# recommended for security (the code is non-trivial). Not enabling it,
+# however, may confuse older FTP clients.
+#async_abor_enable=YES
+#
+# When "listen" directive is enabled, vsftpd runs in standalone mode and
+# listens on IPv4 sockets. This directive cannot be used in conjunction
+# with the listen_ipv6 directive.
+listen=YES
+#
+# Enable passive mode
+pasv_enable=YES
+pasv_addr_resolve=YES
+#
+# Disable seccomp filter sanboxing
+seccomp_sandbox=NO
+#
+# Run in background
+background=NO
+
+ssl_enable=YES
+
+# by default all non anonymous logins and forced to use SSL to send and receive password and data, set to NO to allow non secure connections
+force_local_logins_ssl=YES
+force_local_data_ssl=YES
+
+# provide the path of your certificate and of your private key
+# note that both can be contained in the same file or in different files
+rsa_cert_file=/etc/ssl/certs/vsftpd.pem
+rsa_private_key_file=/etc/ssl/certs/vsftpd.pem
+
+# this setting is set to YES by default and requires all data connections exhibit session reuse which proves they know the secret of the control channel.
+# this is more secure but is not supported by many FTP clients, set to NO for better compatibility
+require_ssl_reuse=YES
+ssl_ciphers=HIGH

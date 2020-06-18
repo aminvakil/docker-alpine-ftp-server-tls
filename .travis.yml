@@ -17,6 +17,10 @@ install:
 - docker build
   --no-cache
   --tag ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} .
+- docker build
+  --no-cache
+  --tag ${TRAVIS_REPO_SLUG}:reusessl
+  - f Dockerfile_reusessl
 script:
 - DOCKERCONTAINER=$(docker run -d -p 127.0.0.1:${CLIENT_PORT}:21 -e ADDRESS=ftp.example.com ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT})
 - sleep 5
@@ -26,5 +30,7 @@ script:
 - docker stop ${DOCKERCONTAINER} && docker rm -fv ${DOCKERCONTAINER}
 after_success:
 - docker tag ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} aminvakil/alpine-ftp-server-tls
+- docker tag ${TRAVIS_REPO_SLUG}:reusessl aminvakil/alpine-ftp-server-tls:reusessl
 - echo "$DOCKER_PASSWORD" | docker login -u aminvakil --password-stdin
 - docker push aminvakil/alpine-ftp-server-tls
+- docker push aminvakil/alpine-ftp-server-tls:reusessl
