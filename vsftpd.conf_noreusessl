@@ -69,5 +69,5 @@ rsa_private_key_file=/etc/ssl/certs/vsftpd.pem
 
 # this setting is set to YES by default and requires all data connections exhibit session reuse which proves they know the secret of the control channel.
 # this is more secure but is not supported by many FTP clients, set to NO for better compatibility
-require_ssl_reuse=YES
+require_ssl_reuse=NO
 ssl_ciphers=HIGH
