@@ -30,8 +30,8 @@ script:
 - hadolint Dockerfile_nossl
 - docker stop ${DOCKERCONTAINER} && docker rm -fv ${DOCKERCONTAINER}
 after_success:
-- docker tag ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} aminvakil/alpine-ftp-server-tls
-- echo "$DOCKER_PASSWORD" | docker login -u aminvakil --password-stdin
-- docker push aminvakil/alpine-ftp-server-tls
-- docker tag ${TRAVIS_REPO_SLUG}:nossl aminvakil/alpine-ftp-server-tls:nossl
-- docker push aminvakil/alpine-ftp-server-tls:nossl
+- docker tag ${TRAVIS_REPO_SLUG}:${TRAVIS_COMMIT} quay.io/aminvakil/alpine-ftp-server-tls
+- docker login quay.io -u="$QUAY_USERNAME" -p="$QUAY_PASSWORD"
+- docker push quay.io/aminvakil/alpine-ftp-server-tls
+- docker tag ${TRAVIS_REPO_SLUG}:nossl quay.io/aminvakil/alpine-ftp-server-tls:nossl
+- docker push quay.io/aminvakil/alpine-ftp-server-tls:nossl
