@@ -8,7 +8,7 @@ docker run -d \
             -p 21000-21010:21000-21010 \
             -e USERS="one|1234" \
             -e ADDRESS=ftp.site.domain \
-            aminvakil/alpine-ftp-server-tls
+            quay.io/aminvakil/alpine-ftp-server-tls
 ```
 
 ## Configuration
