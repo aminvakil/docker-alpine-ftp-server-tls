@@ -66,25 +66,28 @@ jobs:
     name: Push to Quay
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the codebase.
-        uses: actions/checkout@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Quay
+        uses: docker/login-action@v1
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_PASSWORD }}
 
       - name: Push to Quay
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2
         with:
-          registry: quay.io
+          file: ./Dockerfile
+          pull: true
           push: true
-          tags: latest
-          username: ${{ secrets.QUAY_USERNAME }}
-          password: ${{ secrets.QUAY_PASSWORD }}
-          repository: aminvakil/alpine-ftp-server-tls
+          tags: quay.io/aminvakil/alpine-ftp-server-tls:latest
 
       - name: Push nossl to Quay
-        uses: docker/build-push-action@v1
+        uses: docker/build-push-action@v2
         with:
-          registry: quay.io
+          file: ./Dockerfile_nossl
+          pull: true
           push: true
-          tags: nossl
-          username: ${{ secrets.QUAY_USERNAME }}
-          password: ${{ secrets.QUAY_PASSWORD }}
-          repository: aminvakil/alpine-ftp-server-tls
+          tags: quay.io/aminvakil/alpine-ftp-server-tls:nossl
