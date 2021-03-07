@@ -70,7 +70,9 @@ jobs:
           TRIVY_VERSION: 0.16.0
 
       - name: Run trivy.
-        run: trivy image ${GITHUB_REPOSITORY}:${GITHUB_RUN_ID}
+        run: |
+          trivy image ${GITHUB_REPOSITORY}:${GITHUB_RUN_ID}
+          trivy image ${GITHUB_REPOSITORY}:nossl
 
   deploy:
     if: ${{ github.ref == 'refs/heads/master' }}
