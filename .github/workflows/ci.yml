@@ -71,8 +71,8 @@ jobs:
 
       - name: Run trivy.
         run: |
-          trivy image ${GITHUB_REPOSITORY}:${GITHUB_RUN_ID}
-          trivy image ${GITHUB_REPOSITORY}:nossl
+          trivy image --exit-code 1 ${GITHUB_REPOSITORY}:${GITHUB_RUN_ID}
+          trivy image --exit-code 1 ${GITHUB_REPOSITORY}:nossl
 
   deploy:
     if: ${{ github.ref == 'refs/heads/master' }}
