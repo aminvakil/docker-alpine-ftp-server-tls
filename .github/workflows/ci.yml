@@ -3,8 +3,6 @@ name: CI/CD
 'on':
   pull_request:
   push:
-    branches:
-      - master
 
 jobs:
 
@@ -73,11 +71,18 @@ jobs:
           exit-code: '1'
 
   deploy:
-    if: ${{ github.ref == 'refs/heads/master' }}
+    if: startsWith(github.ref, 'refs/tags/v')
     needs: [hadolint, build]
     name: Push to Quay
     runs-on: ubuntu-latest
     steps:
+      - name: Get the tag version
+        id: get_version
+        run: |
+          echo ::set-output name=TAG::${GITHUB_REF/refs\/tags\/v/}
+          TAG=${GITHUB_REF/refs\/tags\/v/}
+          echo ::set-output name=VERSION::${TAG%-*}
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
@@ -94,7 +99,13 @@ jobs:
           file: ./Dockerfile
           pull: true
           push: true
-          tags: quay.io/aminvakil/alpine-ftp-server-tls:latest
+          tags: |
+            quay.io/aminvakil/alpine-ftp-server-tls:${{ env.TAG }}
+            quay.io/aminvakil/alpine-ftp-server-tls:${{ env.VERSION }}
+            quay.io/aminvakil/alpine-ftp-server-tls:latest
+        env:
+          TAG: ${{ steps.get_version.outputs.TAG }}
+          VERSION: ${{ steps.get_version.outputs.VERSION }}
 
       - name: Push nossl to Quay
         uses: docker/build-push-action@v2
