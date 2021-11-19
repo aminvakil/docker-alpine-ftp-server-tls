@@ -2,7 +2,7 @@ FROM alpine:3.15
 
 LABEL maintainer="Amin Vakil <info@aminvakil.com>"
 
-RUN apk --no-cache add vsftpd=3.0.4-r0
+RUN apk --no-cache add vsftpd=3.0.5-r1
 
 COPY vsftpd.pem /etc/ssl/certs/vsftpd.pem
 COPY start_vsftpd.sh /usr/local/bin/start_vsftpd.sh
