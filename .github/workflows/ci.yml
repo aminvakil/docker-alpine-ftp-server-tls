@@ -63,6 +63,7 @@ jobs:
         with:
           image-ref: ${{ github.repository }}:${{ github.run_id }}
           exit-code: '1'
+          skip-files: '/etc/ssl/certs/vsftpd.pem'
 
       - name: Run Trivy vulnerability scanner.
         uses: aquasecurity/trivy-action@master
