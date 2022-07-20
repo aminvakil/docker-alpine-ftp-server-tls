@@ -1,6 +1,16 @@
 # docker-alpine-ftp-server-tls
 Small and flexible docker image with vsftpd server with tls
 
+# Important Note
+I think upstream has made it more complicated than it needs to be since this commit and I'm not merging its commits anymore, although I cherry-pick some of them when I see fit.
+
+https://github.com/delfer/docker-alpine-ftp-server/commit/fbf9afd9368d63a225e093bae227fa878de46b2c
+
+Also for future reference this is the PR of this commit: https://github.com/delfer/docker-alpine-ftp-server/pull/36
+
+FOr further discussion about this you can use [this issue](https://github.com/aminvakil/docker-alpine-ftp-server-tls/issues/14).
+
+
 ## Usage
 ```
 docker run -d \
