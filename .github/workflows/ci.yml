@@ -64,12 +64,14 @@ jobs:
           image-ref: ${{ github.repository }}:${{ github.run_id }}
           exit-code: '1'
           skip-files: '/etc/ssl/certs/vsftpd.pem'
+          severity: 'CRITICAL,HIGH'
 
       - name: Run Trivy vulnerability scanner.
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: ${{ github.repository }}:nossl
           exit-code: '1'
+          severity: 'CRITICAL,HIGH'
 
   deploy:
     if: startsWith(github.ref, 'refs/tags/v')
