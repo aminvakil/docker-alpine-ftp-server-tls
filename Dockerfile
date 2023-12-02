@@ -1,4 +1,4 @@
-FROM alpine:3.18.4
+FROM alpine:3.18.5
 
 LABEL maintainer="Amin Vakil <info@aminvakil.com>"
 
