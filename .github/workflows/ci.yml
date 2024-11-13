@@ -108,6 +108,11 @@ jobs:
             quay.io/aminvakil/alpine-ftp-server-tls:${{ env.TAG }}
             quay.io/aminvakil/alpine-ftp-server-tls:${{ env.VERSION }}
             quay.io/aminvakil/alpine-ftp-server-tls:latest
+          platforms: |
+            linux/386
+            linux/amd64
+            linux/arm64
+            linux/ppc64le
         env:
           TAG: ${{ steps.get_version.outputs.TAG }}
           VERSION: ${{ steps.get_version.outputs.VERSION }}
