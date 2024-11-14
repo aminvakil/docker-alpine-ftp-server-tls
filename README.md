@@ -8,7 +8,7 @@ https://github.com/delfer/docker-alpine-ftp-server/commit/fbf9afd9368d63a225e093
 
 Also for future reference this is the PR of this commit: https://github.com/delfer/docker-alpine-ftp-server/pull/36
 
-FOr further discussion about this you can use [this issue](https://github.com/aminvakil/docker-alpine-ftp-server-tls/issues/14).
+For further discussion about this you can use [this issue](https://github.com/aminvakil/docker-alpine-ftp-server-tls/issues/14).
 
 
 ## Usage
