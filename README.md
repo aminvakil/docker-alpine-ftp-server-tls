@@ -21,6 +21,8 @@ docker run -d \
             quay.io/aminvakil/alpine-ftp-server-tls
 ```
 
+_The image is available for multiple linux platforms: `386`, `amd64`, `arm64`, `ppc64le`._
+
 ## Configuration
 
 Environment variables:
